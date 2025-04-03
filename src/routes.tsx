@@ -9,6 +9,8 @@ import Analytics from "./pages/Analytics";
 import Revenue from "./pages/Revenue";
 import Dashboard from "./pages";
 import MainDashboard from "./pages/Dashboard";
+import CRM from "./pages/CRM";
+import Apps from "./pages/Apps";
 
 const route = [
   {
@@ -21,12 +23,20 @@ const route = [
         component: <MainDashboard />,
       },
       {
-        path: "students",
+        path: "analytics",
         component: <Analytics />,
       },
       {
-        path: "admins",
+        path: "revenue",
         component: <Revenue />,
+      },
+      {
+        path: "crm",
+        component: <CRM />,
+      },
+      {
+        path: "apps",
+        component: <Apps />,
       },
     ],
   },

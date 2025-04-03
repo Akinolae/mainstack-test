@@ -1,3 +1,9 @@
+import Transactions from "../components/Transactions";
+
 export default function Revenue() {
-  return <div>Revenue</div>;
+  return (
+    <div>
+      <Transactions />
+    </div>
+  );
 }
