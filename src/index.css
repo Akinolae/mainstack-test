@@ -14,11 +14,20 @@
 
 .ant-drawer-content {
   border-radius: 20px !important;
-  width: 500px !important;
+  width: 550px !important;
   margin-left: auto !important;
   box-shadow: none !important;
 }
 .ant-drawer-content-wrapper {
   padding: 10px !important;
   box-shadow: none !important;
+}
+
+.ant-drawer-close {
+  font-size: 18px !important;
+  height: 34px !important;
+  width: 34px !important;
+  border-radius: 50% !important;
+  margin-left: auto;
+  color: #131316 !important;
 }
