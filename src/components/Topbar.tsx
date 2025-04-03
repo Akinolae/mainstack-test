@@ -39,7 +39,7 @@ export default function Topbar() {
   ];
 
   return (
-    <div className="flex mt-2 shadow h-[64px] justify-between items-center rounded-[100px] w-full pl-6 pr-3 max-w-screen-2xl m-auto">
+    <div  className="flex shadow bg-white h-[64px] justify-between items-center rounded-[100px] w-full pl-6 pr-3 max-w-screen-2xl m-auto fixed left-0 right-0 ">
       <div>
         <img src={logo} alt="mainstack logo" />
       </div>
@@ -49,8 +49,8 @@ export default function Topbar() {
           key={index}
             to={route.path}
             className={({ isActive }) =>
-              `flex text-[16px] gap-2 font-medium items-center pl-4 pr-4 pt-2 pb-2 rounded-[100px] ${
-                isActive ? "bg-[#131316] text-white" : "text-[#56616B]"
+              `flex transition-all duration-[0.3s]  text-[16px] gap-2 font-medium items-center pl-4 pr-4 pt-2 pb-2 rounded-[100px] ${
+                isActive ? "bg-[#131316] text-white" : "text-[#56616B] hover:bg-[#EFF1F6]"
               }`
             }
           >

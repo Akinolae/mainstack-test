@@ -1,18 +1,24 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import { formatDate, isTransactionDebit } from "../utils/utils";
 import { GoArrowDownLeft } from "react-icons/go";
 import { GoArrowDownRight } from "react-icons/go";
 import Button from "./Button";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
+import { AiOutlineDownload } from "react-icons/ai";
+import CustomDrawer from "./CustomDrawer";
 
 const Btn = (props: any) => {
   return (
     <Button className="bg-[#EFF1F6] text-[14px] font-semibold" {...props}>
-      <div className="flex items-center">
+      <div className="flex items-center gap-2">
         <p>{props?.title}</p>
-        <MdOutlineKeyboardArrowDown style={{ fontSize: "20px" }} />
+        {props.icon ? (
+          <>{props.icon}</>
+        ) : (
+          <MdOutlineKeyboardArrowDown style={{ fontSize: "20px" }} />
+        )}
       </div>
     </Button>
   );
@@ -20,11 +26,16 @@ const Btn = (props: any) => {
 
 export default function Transactions() {
   const context = useContext(AppContext);
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
 
   const transactions = context?.transactions;
 
   return (
     <div>
+      <CustomDrawer isOpen={isOpen} toggle={toggle}>
+        <p>here</p>
+      </CustomDrawer>
       <div className="flex justify-between items-center">
         <div>
           <p className="text-[24px] font-extrabold font-degular">{`${
@@ -35,16 +46,19 @@ export default function Transactions() {
           </p>
         </div>
         <div className="flex gap-3">
-          <Btn title="Filter" />
-          <Btn title="Export list" />
+          <Btn title="Filter" onClick={toggle} />
+          <Btn
+            title="Export list"
+            icon={<AiOutlineDownload style={{ fontSize: "20px" }} />}
+          />
         </div>
       </div>
 
-      <div className="h-[1px] bg-[#EFF1F6] mt-8 mb-8"></div>
+      <div className="h-[1px] bg-[#EFF1F6] mt-5 mb-9"></div>
 
       <div>
         {transactions?.length ? (
-          <div className="flex gap-8 flex-col">
+          <div className="flex gap-6 flex-col">
             {transactions?.map((transaction: any, index) => {
               const isDebit = isTransactionDebit(transaction);
               const date = formatDate(transaction.date);
@@ -67,7 +81,13 @@ export default function Transactions() {
                           ? "Cash Withdrawal"
                           : transaction?.metadata?.product_name
                       }`}</p>
-                      <p className="font-degular text-[#56616B] text-[14px] leading-10">
+                      <p
+                        className={`capitalize font-medium font-degular ${
+                          isDebit && transaction?.status.includes("success")
+                            ? "text-[#0EA163]"
+                            : "text-[#56616B]"
+                        }  text-[14px] leading-10`}
+                      >
                         {isDebit
                           ? transaction?.status
                           : transaction?.metadata.name}
@@ -76,7 +96,7 @@ export default function Transactions() {
                   </div>
                   <div className="text-right">
                     <p className="font-bold font-degular">{`USD ${transaction?.amount}`}</p>
-                    <p className="text-left text-[#56616B] text-[14px]">
+                    <p className="text-left text-[#56616B] text-[14px] font-degular">
                       {date}
                     </p>
                   </div>

@@ -1,55 +1,31 @@
 @font-face {
   font-family: "Degular";
-  src: url("fonts/DegularDisplay-Black.otf") format("otf");
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "Degular";
-  src: url("fonts/DegularDisplay-Bold.otf") format("otf");
-  font-weight: 700;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Degular";
-  src: url("fonts/DegularDisplay-BlackItalic.otf") format("otf");
-  font-weight: 400;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Degular";
-  src: url("fonts/DegularDisplay-BoldItalic.otf") format("otf");
-  font-weight: 700;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Degular";
-  src: url("fonts/DegularText-Black.otf") format("otf");
-  font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Degular";
-  src: url("fonts/DegularText-Bold.otf") format("otf");
-  font-weight: 700;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Degular";
-  src: url("fonts/DegularText-BlackItalic.otf") format("otf");
-  font-weight: 400;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Degular";
-  src: url("fonts/DegularText-BoldItalic.otf") format("otf");
-  font-weight: 700;
-  font-style: italic;
-}
-@font-face {
-  font-family: "Degular";
   src: url("fonts/DegularText-Light.otf") format("otf");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+    font-family: "Degular";
+    src: url("fonts/DegularText-Medium.otf") format("otf");
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Degular";
+    src: url("fonts/DegularText-Semibold.otf") format("otf");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Degular";
+    src: url("fonts/DegularText-Bold.otf") format("otf");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
 }

@@ -3,6 +3,22 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  font-family: "Degular", Arial, Helvetica, sans-serif;
+* {
+  font-family: "Degular", sans-serif !important;
+  scroll-behavior: smooth;
+}
+
+:where(.css-dev-only-do-not-override-1d4w9r2).ant-drawer .ant-drawer-header {
+  border: none !important;
+}
+
+.ant-drawer-content {
+  border-radius: 20px !important;
+  width: 500px !important;
+  margin-left: auto !important;
+  box-shadow: none !important;
+}
+.ant-drawer-content-wrapper {
+  padding: 10px !important;
+  box-shadow: none !important;
 }
