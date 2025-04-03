@@ -7,7 +7,7 @@ import {
 
 import Analytics from "./pages/Analytics";
 import Revenue from "./pages/Revenue";
-import Dashboard from "./pages/INDEX";
+import Dashboard from "./pages";
 import MainDashboard from "./pages/Dashboard";
 
 const route = [
