@@ -4,6 +4,13 @@ import Transactions from "../components/Transactions";
 import { AppContext } from "../context/AppContext";
 import { CiCircleInfo } from "react-icons/ci";
 import Button from "../components/Button";
+import {
+  formatDate,
+  formatMoney,
+  removeDuplicates,
+  sortTransactions,
+} from "../utils/utils";
+import Chart from "../components/charts/Chart";
 
 const Wrapper = (props: any) => (
   <div>
@@ -14,7 +21,9 @@ const Wrapper = (props: any) => (
         </p>
         <CiCircleInfo className="text-[#888F95] text-[14px]" />
       </div>
-      <p className="text-[28px] mt-2 font-bold font-degular">{`USD ${props.amount}`}</p>
+      <p className="text-[28px] mt-2 font-bold font-degular">{`USD ${formatMoney(
+        { number: props.amount }
+      )}`}</p>
     </div>
   </div>
 );
@@ -22,12 +31,35 @@ const Wrapper = (props: any) => (
 export default function Revenue() {
   const context = useContext(AppContext);
   const wallet: any = context?.wallet;
+  const transactions = sortTransactions(context?.transactions ?? []);
+
+  // Calculates the total transaction amount for a given date
+  const totalTransactions = (date: any, transactions: any[]) => {
+    date = new Date(date);
+    const filteredTrx = transactions.filter(
+      (transaction: any) =>
+        new Date(transaction.date).getTime() === date.getTime()
+    );
+
+    return filteredTrx.reduce((a, b) => Number(a) + (Number(b.amount) || 0), 0);
+  };
+
+  const prepareChatData = () => {
+    return transactions.map((transaction: any) => {
+      return {
+        date: formatDate(transaction.date),
+        amount: totalTransactions(transaction.date, transactions),
+      };
+    });
+  };
+
+  console.log(removeDuplicates(prepareChatData()));
 
   return (
-    <div className="mt-28 mb-10">
-      <div className="flex justify-between">
-        <div className="flex justify-between w-full">
-          <div>
+    <div>
+      <div className="flex justify-between items-center w-full">
+        <div className="flex justify-between h-full w-[70%]">
+          <div className="w-full">
             <p className="font-degular">Available Balance</p>
             <div className="w-full flex gap-16">
               <p className="text-[#131316] text-[36px] font-bold mt-2 font-degular">
@@ -39,9 +71,12 @@ export default function Revenue() {
                 text="Withdraw"
               />
             </div>
+            <div className="w-[90%] h-[350px]">
+              <Chart data={removeDuplicates(prepareChatData())} />
+            </div>
           </div>
         </div>
-        <div className="w-[23%] flex flex-col gap-7">
+        <div className="w-[25%] flex flex-col gap-10">
           <Wrapper
             header="Ledger Balance"
             amount={wallet?.ledger_balance ?? 0}
@@ -55,7 +90,7 @@ export default function Revenue() {
         </div>
       </div>
       <div className="mt-[100px]">
-        <Transactions />
+        <Transactions transactions={transactions} />
       </div>
     </div>
   );

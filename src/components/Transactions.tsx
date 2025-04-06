@@ -1,17 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useContext, useState } from "react";
-import { AppContext } from "../context/AppContext";
-import { formatDate, isTransactionDebit } from "../utils/utils";
+import { formatDate, formatMoney, isTransactionDebit } from "../utils/utils";
 import { GoArrowDownLeft } from "react-icons/go";
-import { GoArrowDownRight } from "react-icons/go";
 import Button from "./Button";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 import { AiOutlineDownload } from "react-icons/ai";
-import CustomDrawer from "./CustomDrawer";
+import TransactionFilterModal from "./TransactionFilterModal";
+import { GoArrowUpRight } from "react-icons/go";
+import { useState } from "react";
 
 const Btn = (props: any) => {
   return (
-    <Button className="bg-[#EFF1F6] text-[14px] font-semibold" {...props}>
+    <Button
+      className="bg-[#EFF1F6] pt-4 pb-4 text-[14px] font-semibold pl-7 pr-7"
+      {...props}
+    >
       <div className="flex items-center gap-2">
         <p>{props?.title}</p>
         {props.icon ? (
@@ -24,18 +26,20 @@ const Btn = (props: any) => {
   );
 };
 
-export default function Transactions() {
-  const context = useContext(AppContext);
+export default function Transactions({ transactions }: any) {
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
-  const transactions = context?.transactions;
-
   return (
     <div>
-      <CustomDrawer isOpen={isOpen} toggle={toggle}>
-        <p>here</p>
-      </CustomDrawer>
+      {/* Transaction Filter Modal */}
+      <TransactionFilterModal
+        isOpen={isOpen}
+        toggle={toggle}
+        transactions={transactions}
+      />
+      {/* End of Transaction Filter Modal */}
+
       <div className="flex justify-between items-center">
         <div>
           <p className="text-[24px] font-extrabold font-degular">{`${
@@ -59,7 +63,7 @@ export default function Transactions() {
       <div>
         {transactions?.length ? (
           <div className="flex gap-6 flex-col">
-            {transactions?.map((transaction: any, index) => {
+            {transactions?.map((transaction: any, index: number) => {
               const isDebit = isTransactionDebit(transaction);
               const date = formatDate(transaction.date);
 
@@ -73,7 +77,7 @@ export default function Transactions() {
                           : "bg-[#E3FCF2] text-[#075132]"
                       }`}
                     >
-                      {isDebit ? <GoArrowDownRight /> : <GoArrowDownLeft />}
+                      {isDebit ? <GoArrowUpRight /> : <GoArrowDownLeft />}
                     </div>
                     <div>
                       <p className="font-medium text-[#131316] font-degular">{`${
@@ -95,7 +99,9 @@ export default function Transactions() {
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="font-bold font-degular">{`USD ${transaction?.amount}`}</p>
+                    <p className="font-bold font-degular">{`USD ${formatMoney({
+                      number: transaction?.amount,
+                    })}`}</p>
                     <p className="text-left text-[#56616B] text-[14px] font-degular">
                       {date}
                     </p>

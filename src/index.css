@@ -5,7 +5,9 @@
 
 * {
   font-family: "Degular", sans-serif !important;
+  font-family: "Inter", sans-serif;
   scroll-behavior: smooth;
+  outline: none !important;
 }
 
 :where(.css-dev-only-do-not-override-1d4w9r2).ant-drawer .ant-drawer-header {
@@ -14,7 +16,7 @@
 
 .ant-drawer-content {
   border-radius: 20px !important;
-  width: 550px !important;
+  width: 500px !important;
   margin-left: auto !important;
   box-shadow: none !important;
 }
@@ -30,4 +32,32 @@
   border-radius: 50% !important;
   margin-left: auto;
   color: #131316 !important;
+}
+
+.hide-scrollbar {
+  display: none !important;
+}
+
+.react-select__control:focus-within,
+.react-select__control--is-focused {
+  box-shadow: none !important;
+  outline: none !important;
+  border-color: inherit !important;
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@layer components {
+  .no-outline-select .react-select__control,
+  .no-outline-select .react-select__control--is-focused {
+    @apply shadow-none outline-none border-inherit;
+  }
 }
