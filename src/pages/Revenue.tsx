@@ -53,8 +53,6 @@ export default function Revenue() {
     });
   };
 
-  console.log(removeDuplicates(prepareChatData()));
-
   return (
     <div>
       <div className="flex justify-between items-center w-full">

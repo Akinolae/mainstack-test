@@ -10,6 +10,7 @@ export default function Chart({ data }: any) {
           stroke="#56616B"
           fontSize={"14px"}
           fontWeight={"normal"}
+          color="#56616B"
         />
         <Line type="monotone" dataKey="amount" stroke="#FF5403" />
       </LineChart>

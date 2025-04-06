@@ -7,6 +7,7 @@ import { AiOutlineDownload } from "react-icons/ai";
 import TransactionFilterModal from "./TransactionFilterModal";
 import { GoArrowUpRight } from "react-icons/go";
 import { useState } from "react";
+import EmptyTrxState from "./EmptyTrxState";
 
 const Btn = (props: any) => {
   return (
@@ -84,6 +85,8 @@ export default function Transactions({ transactions }: any) {
                         isDebit
                           ? "Cash Withdrawal"
                           : transaction?.metadata?.product_name
+                          ? transaction?.metadata?.product_name
+                          : ''
                       }`}</p>
                       <p
                         className={`capitalize font-medium font-degular ${
@@ -99,10 +102,12 @@ export default function Transactions({ transactions }: any) {
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="font-bold font-degular">{`USD ${formatMoney({
-                      number: transaction?.amount,
-                    })}`}</p>
-                    <p className="text-left text-[#56616B] text-[14px] font-degular">
+                    <p className="font-bold font-degular text-right">{`USD ${formatMoney(
+                      {
+                        number: transaction?.amount,
+                      }
+                    )}`}</p>
+                    <p className="text-right text-[#56616B] text-[14px] font-degular">
                       {date}
                     </p>
                   </div>
@@ -110,7 +115,9 @@ export default function Transactions({ transactions }: any) {
               );
             })}
           </div>
-        ) : null}
+        ) : (
+          <EmptyTrxState />
+        )}
       </div>
     </div>
   );

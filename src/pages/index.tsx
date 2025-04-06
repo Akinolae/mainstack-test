@@ -8,7 +8,7 @@ const Dashboard = () => {
         <div>
           <Topbar />
         </div>
-        <div className="flex flex-col w-full h-full mt-28 mb-10 max-w-screen-xl m-auto">
+        <div className="flex flex-col w-full h-full mt-32 mb-20 max-w-screen-xl m-auto">
           <Outlet />
         </div>
       </div>
