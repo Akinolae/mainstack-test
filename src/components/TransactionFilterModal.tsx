@@ -1,9 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
 import Button from "./Button";
 import CustomDrawer from "./CustomDrawer";
 import Select from "./Select";
 import { filterOptions, transactionTypeOptions } from "../utils/utils";
+import { FiChevronDown } from "react-icons/fi";
+import { DatePicker } from "antd";
+import type { DatePickerProps } from "antd/es/date-picker";
+import { useState } from "react";
 
 interface TransactionFilterModalProps {
   isOpen: boolean;
@@ -11,17 +14,28 @@ interface TransactionFilterModalProps {
   transactions: any[];
 }
 
+interface DateButtonProps extends DatePickerProps {
+  text?: string;
+}
+
+const DateButton = (props: DateButtonProps) => {
+  return (
+    <>
+      <DatePicker suffixIcon={<FiChevronDown fontSize={"20px"} />} {...props} />
+    </>
+  );
+};
+
 export default function TransactionFilterModal(
   props: TransactionFilterModalProps
 ) {
   const [filter, setFilter] = useState("");
-  //   const [selectType, setSelectType] = useState("");
   const { isOpen, toggle } = props;
 
   return (
     <div>
-      <CustomDrawer isOpen={isOpen} toggle={toggle}>
-        <div className="flex flex-col justify-between h-full">
+      <CustomDrawer title="Filter" isOpen={isOpen} toggle={toggle}>
+        <div className="flex flex-col justify-between h-[90%]">
           <div>
             <div
               style={{ scrollBehavior: "smooth" }}
@@ -41,8 +55,18 @@ export default function TransactionFilterModal(
                 </div>
               ))}
             </div>
+
+            <div className="flex flex-col mt-10 mb-6">
+              <label className="text-[16px] text-[#131316] mb-2">
+                Date Range
+              </label>
+              <div className="flex justify-between gap-4">
+                <DateButton text="here" />
+                <DateButton />
+              </div>
+            </div>
             {/* Checkbox */}
-            <div className="flex flex-col gap-6 mt-10">
+            <div className="flex flex-col gap-6">
               <Select
                 options={transactionTypeOptions}
                 maxMenuHeight={600}
@@ -62,6 +86,7 @@ export default function TransactionFilterModal(
             />
             <Button
               text="Apply"
+              onClick={toggle}
               className="bg-[#131316] h-[48px] text-white w-[198px]"
             />
           </div>

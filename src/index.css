@@ -45,6 +45,18 @@
   border-color: inherit !important;
 }
 
+.ant-checkbox-checked .ant-checkbox-inner {
+  background-color: #131316 !important;
+  border-color: #131316 !important;
+}
+
+.ant-picker-outlined {
+  background-color: #eff1f6;
+  border: none;
+  border-radius: 12px;
+  height: 52px;
+  width: 203px;
+}
 @layer utilities {
   .no-scrollbar::-webkit-scrollbar {
     display: none;
@@ -53,6 +65,10 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+}
+
+.ant-drawer-header {
+  display: none !important;
 }
 
 @layer components {

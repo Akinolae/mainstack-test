@@ -8,15 +8,18 @@ import { MdOutlinePeopleAlt } from "react-icons/md";
 import { AiOutlineAppstoreAdd } from "react-icons/ai";
 import { GoHome } from "react-icons/go";
 import Profile from "./Profile";
-import Button from "./Button";
 import { useState } from "react";
 import { FiChevronDown } from "react-icons/fi";
+import { Popover } from "antd";
+import PopoverContent from "./PopoverContent";
 
 export default function Topbar() {
   const [active, setActive] = useState(false);
   const iconStyle = {
     fontSize: "20px",
   };
+
+  const toggle = () => setActive(!active);
 
   const routes = [
     { name: "Home", path: "/", icon: <GoHome /> },
@@ -42,6 +45,24 @@ export default function Topbar() {
     },
   ];
 
+  const contentList = [
+    {
+      title: "Link In Bio",
+    },
+    {
+      title: "Store",
+    },
+    {
+      title: "Media Kit",
+    },
+    {
+      title: "Invoicing",
+    },
+    {
+      title: "Bookings",
+    },
+  ];
+
   return (
     <div className="flex shadow bg-white h-[64px] justify-between items-center rounded-[100px] w-full pl-6 pr-3 max-w-screen-2xl m-auto fixed left-0 right-0 ">
       <div>
@@ -52,34 +73,39 @@ export default function Topbar() {
           return (
             <>
               {route.name === "Apps" ? (
-                <Button
-                  onClick={() => setActive(true)}
-                  className={`flex transition-all duration-[0.3s]  text-[16px] gap-2 font-medium items-center pl-4 pr-4 pt-2 pb-2 rounded-[100px] ${
-                    active ? "bg-[#131316] text-white" : "hover:bg-[#EFF1F6]"
-                  }`}
+                <Popover
+                  open={active}
+                  content={<PopoverContent list={contentList} />}
                 >
                   <div
-                    className={`flex w-full gap-5 ${
-                      active ? "w-auto" : "w-full"
+                    onClick={toggle}
+                    className={`flex transition-all duration-[0.3s]  text-[16px] gap-2 font-medium items-center pl-4 pr-4 pt-2 pb-2 rounded-[100px] ${
+                      active ? "bg-[#131316] text-white" : "hover:bg-[#EFF1F6]"
                     }`}
                   >
-                    <div className="flex gap-2">
-                      <div style={iconStyle}>{route.icon}</div>
-                      <p>{route.name}</p>
-                    </div>
-                    {active ? (
-                      <div className="flex gap-5 items-center">
-                        <div className="h-full w-[1px] bg-white"></div>
-                        <div className="flex gap-2 items-center">
-                          <p>Link in bio</p>
-                          <div>
-                            <FiChevronDown />
+                    <div
+                      className={`flex w-full gap-5 ${
+                        active ? "w-auto" : "w-full"
+                      }`}
+                    >
+                      <div className="flex gap-2">
+                        <div style={iconStyle}>{route.icon}</div>
+                        <p>{route.name}</p>
+                      </div>
+                      {active ? (
+                        <div className="flex gap-5 items-center">
+                          <div className="h-full w-[1px] bg-white"></div>
+                          <div className="flex gap-2 items-center">
+                            <p>Link in bio</p>
+                            <div>
+                              <FiChevronDown />
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    ) : null}
+                      ) : null}
+                    </div>
                   </div>
-                </Button>
+                </Popover>
               ) : (
                 <NavLink
                   key={index}

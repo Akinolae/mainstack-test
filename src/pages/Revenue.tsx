@@ -69,7 +69,7 @@ export default function Revenue() {
                 text="Withdraw"
               />
             </div>
-            <div className="w-[90%] h-[350px]">
+            <div style={{zIndex: -1}} className="w-[90%] h-[350px]">
               <Chart data={removeDuplicates(prepareChatData())} />
             </div>
           </div>
