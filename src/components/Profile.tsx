@@ -33,7 +33,7 @@ export default function Profile() {
       icon: <BsGift />,
     },
     {
-      title: "Integrattions",
+      title: "Integrations",
       icon: <AiOutlineAppstoreAdd />,
     },
     {
